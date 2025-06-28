@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host --port 3030",
     "build": "tsc -b && vite build",
+    "start": "vite preview --host --port 3030",
     "lint": "eslint --fix --ext .ts,.tsx",
     "preview": "vite preview"
   },
@@ -14,6 +15,7 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.6",
     "@mui/material": "^7.1.2",
+    "jotai": "^2.12.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.59.0"

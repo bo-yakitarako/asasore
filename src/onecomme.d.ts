@@ -42,4 +42,9 @@ export type CommentsEvent = {
   };
 };
 
-export type OneCommeEvent = ConnectedEvent | CommentsEvent;
+export type DeletedEvent = {
+  type: 'deleted';
+  data: { id: string; message: string }[];
+};
+
+export type OneCommeEvent = ConnectedEvent | CommentsEvent | DeletedEvent;

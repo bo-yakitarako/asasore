@@ -2,6 +2,8 @@ import { styled } from '@mui/material/styles';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSetAtom } from 'jotai';
+import { membersAtom, votesAtom } from './store';
 
 type Schema = { topic: string };
 
@@ -9,6 +11,8 @@ const FONT_SIZE = 84;
 const DEFAULT_TOPIC = 'ここにお題が出るぜぇ？';
 
 export const Topic = () => {
+  const setMembers = useSetAtom(membersAtom);
+  const setVotes = useSetAtom(votesAtom);
   const [isEdit, setIsEdit] = useState(false);
   const [topic, setTopic] = useState(DEFAULT_TOPIC);
   const { register, handleSubmit } = useForm<Schema>({
@@ -27,6 +31,8 @@ export const Topic = () => {
   const onSubmit = (data: Schema) => {
     setTopic(data.topic);
     setIsEdit(false);
+    setMembers([]);
+    setVotes([]);
   };
 
   return (
