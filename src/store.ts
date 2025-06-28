@@ -1,5 +1,7 @@
 import { atom } from 'jotai';
 
+export const topicAtom = atom<string>('ここにお題が出るぜぇ？');
+
 export type Member = {
   memberId: string;
   name: string;

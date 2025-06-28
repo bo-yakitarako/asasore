@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import type { OneCommeEvent } from '../onecomme';
-import { useAtom } from 'jotai';
-import { membersAtom, votesAtom, type Member, type Vote } from '../store';
+import { useAtom, useSetAtom } from 'jotai';
+import { membersAtom, topicAtom, votesAtom, type Member, type Vote } from '../store';
 
 export const useWebSocket = () => {
+  const setTopic = useSetAtom(topicAtom);
   const [members, setMembers] = useAtom(membersAtom);
   const [votes, setVotes] = useAtom(votesAtom);
 
@@ -16,6 +17,12 @@ export const useWebSocket = () => {
         case 'comments':
           // eslint-disable-next-line complexity
           data.comments.forEach(({ data }) => {
+            if (data.isOwner && data.comment.startsWith('お題：')) {
+              setTopic(data.comment.replace('お題：', ''));
+              setMembers([]);
+              setVotes([]);
+              return;
+            }
             if (
               ['ノ', 'ﾉ'].includes(data.comment) &&
               !members.some(({ memberId }) => memberId === data.userId) &&
